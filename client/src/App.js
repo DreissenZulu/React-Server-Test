@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import './App.css';
+import PostCards from "./components/PostCards.js"
 
 function App() {
   const [posts, setPosts] = useState({
@@ -9,21 +10,19 @@ function App() {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    console.log(event.target.post.value)
-    // axios.post("/api/post", {
-    //   newPost: event.target.post.value
-    // }).then(() => { getPosts() })
+    axios.post("/api/post", {
+      newPost: event.target.post.value
+    }).then(() => { getPosts() })
   }
 
   useEffect(() => {
     getPosts();
-  }, [posts.postList] )
+  }, [posts] )
 
   async function getPosts() {
     let allPosts = await axios.get("/api/posts");
-    if (allPosts !== posts.postList) {
+    if (JSON.stringify(allPosts.data) !== JSON.stringify(posts.postList)) {
       setPosts({ postList: allPosts.data })
-      console.log(posts.postList)
     }
   }
 
@@ -33,6 +32,7 @@ function App() {
         <input type="text" placeholder="Enter post (200 characters or less)" name="post" />
         <button type="submit">Submit Post</button>
       </form>
+      <PostCards posts={posts.postList} />
     </div>
   );
 }

@@ -10,8 +10,8 @@ const orm = {
             resolve(res);
         });
     },
-    insertData: async (table, columns, vals, resolve) => {
-        let queryString = `INSERT INTO ${table} (${columns}) VALUES (${vals});`;
+    insertData: async (vals, resolve) => {
+        let queryString = `INSERT INTO testInfo (post) VALUES ("${vals}");`;
         await connection.query(queryString, function (err, res) {
             if (err) throw err;
             resolve(res);

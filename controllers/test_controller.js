@@ -16,7 +16,7 @@ router.get("/api/posts", (req, res) => {
 });
 
 router.post("/api/post", (req, res) => {
-    model.insertOne(req.body.value, result => {
+    model.insertOne(req.body.newPost, result => {
         res.status(200).send(result);
     })
 });

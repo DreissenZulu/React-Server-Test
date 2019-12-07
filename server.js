@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const path = require("path");
 
@@ -11,9 +12,9 @@ app.use(express.json());
 // Use the files in the client build folder. Necessary for the React frontend
 app.use(express.static(path.join(__dirname, "./client/build/")))
 
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+const routes = require("./controllers/test_controller.js");
+
+app.use(routes);
 
 // Start the API server
 app.listen(PORT, function () {

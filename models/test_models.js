@@ -8,7 +8,7 @@ var model = {
         });
     },
     insertOne: (vals, resolve) => {
-        orm.insertData("testInfo", "post", vals, (res) => {
+        orm.insertData(vals, (res) => {
             resolve(res);
         });
     }

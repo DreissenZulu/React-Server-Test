@@ -9,13 +9,13 @@ router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-router.get("/api/value", (req, res) => {
+router.get("/api/posts", (req, res) => {
     model.selectAll(result => {
         res.status(200).send(result);
     })
 });
 
-router.post("/api/value", (req, res) => {
+router.post("/api/post", (req, res) => {
     model.insertOne(req.body.value, result => {
         res.status(200).send(result);
     })

@@ -10,9 +10,13 @@ function App() {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    axios.post("/api/post", {
-      newPost: event.target.post.value
-    }).then(() => { getPosts() })
+    if (event.target.post.value.length <= 200) {
+      axios.post("/api/post", {
+        newPost: event.target.post.value
+      }).then(() => { getPosts() })
+    } else {
+      console.log("Post is longer than 200 characters!")
+    }
   }
 
   useEffect(() => {

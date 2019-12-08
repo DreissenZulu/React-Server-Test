@@ -10,7 +10,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Use the files in the client build folder. Necessary for the React frontend
-app.use(express.static(path.join(__dirname, "./client/build/")))
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"))
+} else {
+  app.use(express.static(path.join(__dirname, "./client/build/")))
+}
 
 const routes = require("./controllers/test_controller.js");
 
